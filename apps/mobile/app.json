@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Working Tracker",
+    "slug": "workingtracker",
+    "version": "3.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "bundleIdentifier": "com.workingtracker.app",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.workingtracker.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    }
+  }
+}

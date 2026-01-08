@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres:15
+    container_name: workingtracker-db
+    environment:
+      POSTGRES_DB: workingtracker
+      POSTGRES_USER: workingtracker
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U workingtracker"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./services/api
+      dockerfile: Dockerfile
+    container_name: workingtracker-backend
+    environment:
+      DATABASE_URL: postgresql://workingtracker:password@database:5432/workingtracker
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-change-me}
+      REFRESH_SECRET_KEY: ${REFRESH_SECRET_KEY:-change-me}
+    ports:
+      - "8000:8000"
+    depends_on:
+      database:
+        condition: service_healthy
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main_complete:app --host 0.0.0.0 --port 8000 --ws websockets"
+
+  frontend:
+    build:
+      context: ./services/web
+      dockerfile: Dockerfile
+    container_name: workingtracker-frontend
+    environment:
+      REACT_APP_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

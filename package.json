@@ -1,0 +1,35 @@
+{
+  "name": "workingtracker",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Enterprise Workforce Intelligence Platform - Complete Monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "web:dev": "cd apps/web && npm run dev",
+    "mobile:dev": "cd apps/mobile && npm run start",
+    "desktop:dev": "cd apps/desktop && npm run dev",
+    "extension:dev": "cd apps/extension && npm run dev",
+    "api:dev": "cd services/api && uvicorn main:app --reload",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "devDependencies": {
+    "turbo": "^1.11.0",
+    "typescript": "^5.3.3",
+    "prettier": "^3.1.1",
+    "eslint": "^8.56.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

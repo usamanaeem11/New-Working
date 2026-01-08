@@ -1,0 +1,33 @@
+// Add these imports to App.js (around line 20-30):
+import ClientPortal from './pages/ClientPortal';
+import ClientProjects from './pages/ClientProjects';
+import ClientInvoices from './pages/ClientInvoices';
+import ResourcePlanning from './pages/ResourcePlanning';
+import SkillMatrix from './pages/SkillMatrix';
+import CapacityPlanner from './pages/CapacityPlanner';
+import WorkflowBuilder from './pages/WorkflowBuilder';
+import PendingApprovals from './pages/PendingApprovals';
+import BusinessIntelligence from './pages/BusinessIntelligence';
+import CustomDashboard from './pages/CustomDashboard';
+import Wellness from './pages/Wellness';
+import WellnessGoals from './pages/WellnessGoals';
+import OKRs from './pages/OKRs';
+import PerformanceReviews from './pages/PerformanceReviews';
+import ReviewCycle from './pages/ReviewCycle';
+
+// Add these routes to the Router component (inside <Routes>):
+<Route path="/client-portal" element={<ClientPortal />} />
+<Route path="/client-portal/projects" element={<ClientProjects />} />
+<Route path="/client-portal/invoices" element={<ClientInvoices />} />
+<Route path="/resource-planning" element={<ResourcePlanning />} />
+<Route path="/resource-planning/skills" element={<SkillMatrix />} />
+<Route path="/resource-planning/capacity" element={<CapacityPlanner />} />
+<Route path="/workflows" element={<WorkflowBuilder />} />
+<Route path="/workflows/approvals" element={<PendingApprovals />} />
+<Route path="/business-intelligence" element={<BusinessIntelligence />} />
+<Route path="/business-intelligence/dashboard" element={<CustomDashboard />} />
+<Route path="/wellness" element={<Wellness />} />
+<Route path="/wellness/goals" element={<WellnessGoals />} />
+<Route path="/performance/okrs" element={<OKRs />} />
+<Route path="/performance/reviews" element={<PerformanceReviews />} />
+<Route path="/performance/cycles" element={<ReviewCycle />} />

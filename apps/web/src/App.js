@@ -1,0 +1,108 @@
+import React from 'react';
+import "@/App.css";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import { WebSocketProvider } from "./context/WebSocketContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { DashboardLayout } from "./components/Layout/DashboardLayout";
+import { Toaster } from "./components/ui/sonner";
+
+// Pages
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import AuthCallback from "./pages/AuthCallback";
+import Dashboard from "./pages/Dashboard";
+import TimeTracking from "./pages/TimeTracking";
+import Screenshots from "./pages/Screenshots";
+import ActivityPage from "./pages/Activity";
+import Timesheets from "./pages/Timesheets";
+import Team from "./pages/Team";
+import Leaves from "./pages/Leaves";
+import Payroll from "./pages/Payroll";
+import Settings from "./pages/Settings";
+import Projects from "./pages/Projects";
+import Attendance from "./pages/Attendance";
+import Shifts from "./pages/Shifts";
+import Invoices from "./pages/Invoices";
+import Subscription from "./pages/Subscription";
+import AIInsights from "./pages/AIInsights";
+import UserManagement from "./pages/UserManagement";
+import PricingPage from "./pages/PricingPage";
+import TeamChat from "./pages/TeamChat";
+import Checkout from "./pages/Checkout";
+import EmployeeAssignments from "./pages/EmployeeAssignments";
+import WorkAgreements from "./pages/WorkAgreements";
+import Expenses from "./pages/Expenses";
+
+// Router component that handles session_id detection
+function AppRouter() {
+  const location = useLocation();
+
+  // Check URL fragment for session_id (synchronous, before first render)
+  // REMINDER: DO NOT HARDCODE THE URL, OR ADD ANY FALLBACKS OR REDIRECT URLS, THIS BREAKS THE AUTH
+  if (location.hash?.includes('session_id=')) {
+    return <AuthCallback />;
+  }
+
+  return (
+    <Routes>
+      {/* Public routes */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/pricing" element={<PricingPage />} />
+      <Route path="/checkout" element={<Checkout />} />
+
+      {/* Protected routes with dashboard layout */}
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <WebSocketProvider>
+              <DashboardLayout />
+            </WebSocketProvider>
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Navigate to="/dashboard" replace />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="time-tracking" element={<TimeTracking />} />
+        <Route path="screenshots" element={<Screenshots />} />
+        <Route path="activity" element={<ActivityPage />} />
+        <Route path="timesheets" element={<Timesheets />} />
+        <Route path="team" element={<Team />} />
+        <Route path="leaves" element={<Leaves />} />
+        <Route path="payroll" element={<Payroll />} />
+        <Route path="expenses" element={<Expenses />} />
+        <Route path="projects" element={<Projects />} />
+        <Route path="attendance" element={<Attendance />} />
+        <Route path="shifts" element={<Shifts />} />
+        <Route path="invoices" element={<Invoices />} />
+        <Route path="subscription" element={<Subscription />} />
+        <Route path="ai-insights" element={<AIInsights />} />
+        <Route path="user-management" element={<UserManagement />} />
+        <Route path="settings" element={<Settings />} />
+        <Route path="team-chat" element={<TeamChat />} />
+        <Route path="employee-assignments" element={<EmployeeAssignments />} />
+        <Route path="work-agreements" element={<WorkAgreements />} />
+      </Route>
+
+      {/* Catch all - redirect to dashboard */}
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+    </Routes>
+  );
+}
+
+function App() {
+  return (
+    <div className="App">
+      <AuthProvider>
+        <BrowserRouter>
+          <AppRouter />
+          <Toaster position="top-right" richColors />
+        </BrowserRouter>
+      </AuthProvider>
+    </div>
+  );
+}
+
+export default App;

@@ -1,0 +1,91 @@
+# Electron Builder Configuration
+# Production builds for Windows, macOS, Linux
+
+appId: com.workingtracker.desktop
+productName: Working Tracker
+copyright: Copyright © 2026 Working Tracker
+
+directories:
+  output: dist
+  buildResources: build
+
+files:
+  - "**/*"
+  - "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}"
+  - "!.editorconfig"
+  - "!**/._*"
+  - "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}"
+  - "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}"
+  - "!**/{appveyor.yml,.travis.yml,circle.yml}"
+  - "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+
+# Windows Configuration
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+  icon: build/icon.ico
+  publisherName: Working Tracker Inc
+  verifyUpdateCodeSignature: true
+  signingHashAlgorithms: ['sha256']
+  
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Working Tracker
+  
+# macOS Configuration
+mac:
+  target:
+    - target: dmg
+      arch: [universal, arm64, x64]
+  category: public.app-category.business
+  icon: build/icon.icns
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  notarize:
+    teamId: YOUR_TEAM_ID
+    
+dmg:
+  sign: true
+  contents:
+    - x: 130
+      y: 220
+    - x: 410
+      y: 220
+      type: link
+      path: /Applications
+      
+# Linux Configuration
+linux:
+  target:
+    - AppImage
+    - deb
+    - rpm
+  category: Office
+  icon: build/icons
+  synopsis: Workforce Intelligence Operating System
+  description: Complete workforce management and AI-powered productivity platform
+  
+appImage:
+  license: LICENSE
+  
+deb:
+  depends: ["libgtk-3-0", "libnotify4", "libnss3", "libxss1", "libxtst6", "xdg-utils"]
+  
+# Auto-update
+publish:
+  provider: generic
+  url: https://downloads.workingtracker.com/desktop/
+  channel: latest

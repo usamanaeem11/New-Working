@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true,
+    "incremental": true,
+    "paths": {
+      "@workingtracker/ui": ["./packages/ui/src"],
+      "@workingtracker/utils": ["./packages/utils/src"],
+      "@workingtracker/types": ["./packages/types/src"],
+      "@workingtracker/config": ["./packages/config/src"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "build", ".next"]
+}

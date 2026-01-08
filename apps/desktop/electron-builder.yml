@@ -1,0 +1,12 @@
+appId: com.workingtracker.desktop
+productName: Working Tracker
+directories:
+  output: dist
+files:
+  - src/**/*
+win:
+  target: nsis
+mac:
+  target: dmg
+linux:
+  target: AppImage

@@ -1,0 +1,11 @@
+Asset ID,Asset Type,Owner,Classification,Location,Status,Last Audit
+SVR-001,Server,IT Dept,Confidential,DataCenter-1,Active,2026-01-01
+SVR-002,Server,IT Dept,Confidential,DataCenter-1,Active,2026-01-01
+DB-001,Database,Data Team,Restricted,DataCenter-1,Active,2026-01-01
+APP-001,Application,Dev Team,Internal,Cloud,Active,2026-01-01
+APP-002,Application,Dev Team,Internal,Cloud,Active,2026-01-01
+FW-001,Firewall,Security,Confidential,DataCenter-1,Active,2026-01-01
+LB-001,Load Balancer,IT Dept,Internal,Cloud,Active,2026-01-01
+BKP-001,Backup System,IT Dept,Confidential,DataCenter-2,Active,2026-01-01
+MON-001,Monitoring,IT Dept,Internal,Cloud,Active,2026-01-01
+API-001,API Gateway,Dev Team,Internal,Cloud,Active,2026-01-01
